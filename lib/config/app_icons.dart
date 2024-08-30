@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppIconsConfig {
   static const Icon searchIcon = Icon(Icons.search);
-  static const Icon ratingIcon = Icon(Icons.star_rate);
+  static const Icon ratingIcon = Icon(
+    Icons.star_rate,
+    color: Colors.yellow,
+    size: 11,
+  );
   static const Icon facebookIcon = Icon(Icons.facebook);
   static const Icon playIcon = Icon(Icons.play_circle);
   static const Icon pauseIcon = Icon(Icons.pause_circle);
