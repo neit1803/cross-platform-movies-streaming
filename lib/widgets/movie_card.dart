@@ -19,16 +19,11 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width * 0.2;
-    final height = MediaQuery.of(context).size.height * 0.6;
-
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: width,
-          height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -62,7 +57,7 @@ class MovieCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.black.withOpacity(0.1),
+            Colors.black.withOpacity((type == "New release" ? 0.1 : 0.3)),
             Colors.black.withOpacity(1),
           ],
           begin: Alignment.topCenter,
