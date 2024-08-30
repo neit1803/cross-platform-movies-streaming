@@ -1,3 +1,5 @@
+import 'package:cross_platform_flms_application/config/app_colors.dart';
+import 'package:cross_platform_flms_application/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,6 +11,14 @@ class MyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      title: "Movies Streaming",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColorConfig.background,
+        useMaterial3: true,
+      ),
+      home: HomeScreen(),
+    );
   }
 }
