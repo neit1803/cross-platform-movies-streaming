@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:10, left: 60,right: 60),
+      padding: const EdgeInsets.only(left: 50, right: 50),
       child: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -37,22 +37,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           IconButton(
             padding: EdgeInsets.zero,
-            onPressed: (){}, 
+            onPressed: () {},
             icon: AppIconsConfig.searchIcon,
           ),
-          SizedBox(width: 20,),
+          SizedBox(
+            width: 20,
+          ),
           IconButton(
             padding: EdgeInsets.zero,
-            onPressed: (){},
+            onPressed: () {},
             icon: AppIconsConfig.notifcationIcon,
           ),
-          SizedBox(width: 20,),
-          CustomButton(
-              content: "Sign Up", onPressed: (){}, isActive: false),
+          SizedBox(
+            width: 20,
+          ),
+          CustomButton(content: "Sign Up", onPressed: () {}, isActive: false),
           SizedBox(width: 10),
-          CustomButton(
-              content: "Login", onPressed: (){}, isActive: true),
-              
+          CustomButton(content: "Login", onPressed: () {}, isActive: true),
+
           // CustomButton(
           //   content: "Add Watchlist",
           //   onPressed: (){},
@@ -82,12 +84,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           //   ),
           //   onTap: (){},
           // ),
-          
         ],
       ),
     );
   }
-  
+
   @override
   // TODO: implement preferredSize
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);

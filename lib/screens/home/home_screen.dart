@@ -1,7 +1,9 @@
 import 'package:cross_platform_flms_application/config/app_colors.dart';
 import 'package:cross_platform_flms_application/config/app_icons.dart';
 import 'package:cross_platform_flms_application/widgets/AppBar/app_bar.dart';
+import 'package:cross_platform_flms_application/widgets/brand_block.dart';
 import 'package:cross_platform_flms_application/widgets/custom_button.dart';
+import 'package:cross_platform_flms_application/widgets/list_brand_card.dart';
 import 'package:cross_platform_flms_application/widgets/list_movie_card.dart';
 import 'package:cross_platform_flms_application/widgets/movie_card.dart';
 import 'package:flutter/material.dart';
@@ -652,8 +654,9 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: EdgeInsets.only(top: 100, bottom: 100),
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: Column(children: [
+              ListBrandCard(datas: newReleases),
               ListMovieCard(genre: "New release", datas: newReleases),
-              ListMovieCard(genre: "Series", datas: Series)
+              ListMovieCard(genre: "Series", datas: Series),
             ]),
           )),
     );
