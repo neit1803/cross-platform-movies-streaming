@@ -3,12 +3,12 @@ import 'package:cross_platform_flms_application/config/app_icons.dart';
 import 'package:cross_platform_flms_application/config/app_text.dart';
 import 'package:cross_platform_flms_application/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor = AppColorConfig.background;
+  final double appBarHeight = kToolbarHeight;
 
-  const CustomAppBar();
+  const CustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +90,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  Size get preferredSize => new Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(appBarHeight);
 }
