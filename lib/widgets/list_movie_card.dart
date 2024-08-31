@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cross_platform_flms_application/config/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cross_platform_flms_application/widgets/movie_card.dart';
