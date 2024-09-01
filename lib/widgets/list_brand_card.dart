@@ -1,26 +1,24 @@
 import 'package:cross_platform_flms_application/config/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:cross_platform_flms_application/widgets/movie_card.dart';
+import 'package:cross_platform_flms_application/config/app_icons.dart';
+import 'package:cross_platform_flms_application/widgets/brand_block.dart';
 import 'package:cross_platform_flms_application/widgets/direction_button.dart';
+import 'package:flutter/material.dart';
 
-class ListMovieCard extends StatefulWidget {
-  final String genre;
+class ListBrandCard extends StatefulWidget {
   final List<Map<String, Object>> datas;
 
-  const ListMovieCard({
+  const ListBrandCard({
     super.key,
-    required this.genre,
     required this.datas,
   });
 
   @override
-  _ListMovieCardState createState() => _ListMovieCardState();
+  _ListBrandCardState createState() => _ListBrandCardState();
 }
 
-class _ListMovieCardState extends State<ListMovieCard> {
+class _ListBrandCardState extends State<ListBrandCard> {
   late ScrollController _scrollController;
   bool _showBackwardButton = false;
-  int? _selectedIndex; // Lưu chỉ số của card được chọn
 
   @override
   void initState() {
@@ -55,32 +53,6 @@ class _ListMovieCardState extends State<ListMovieCard> {
     );
   }
 
-  void _onCardTapped(int index, double cardWidth) {
-    setState(() {
-      if (_selectedIndex == index) {
-        _selectedIndex = null; // Bỏ chọn nếu card đang được chọn
-      } else {
-        _selectedIndex = index; // Chọn card mới
-      }
-      if (_selectedIndex != null) {
-        final selectedIndex = _selectedIndex!;
-        final itemOffset = selectedIndex * (cardWidth + 16);
-        if (_scrollController.hasClients) {
-          final itemOffset = selectedIndex * (cardWidth + 16);
-          final offset = itemOffset - _scrollController.offset;
-
-          if (offset.abs() > cardWidth) {
-            _scrollController.animateTo(
-              _scrollController.offset + offset,
-              duration: Duration(seconds: 1),
-              curve: Curves.easeIn,
-            );
-          }
-        }
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -89,14 +61,14 @@ class _ListMovieCardState extends State<ListMovieCard> {
     return Container(
       width: width,
       padding: EdgeInsets.all(10),
-      child: _ColumnMovieCard(width, height),
+      child: _ColumBrandCard(width, height),
     );
   }
 
   Widget _buildGradientOverlay(double height) {
     return Positioned(
       top: 0,
-      right: 0,
+      right: 0, // Di chuyển gradient overlay về bên trái
       child: Container(
         width: 70,
         height: height,
@@ -109,28 +81,28 @@ class _ListMovieCardState extends State<ListMovieCard> {
               AppColorConfig.background.withOpacity(0.6),
               AppColorConfig.background.withOpacity(1),
             ],
-            stops: [0.0, 0.6, 1.0],
+            stops: [0.0, 0.6, 1.0], // Điều chỉnh gradient
           ),
         ),
       ),
     );
   }
 
-  Widget _ColumnMovieCard(double width, double height) {
+  Widget _ColumBrandCard(double width, double height) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.genre, style: GenreTextStyle()),
         SizedBox(height: 20),
         SizedBox(
-          height: height * (widget.genre == "New release" ? 0.6 : 0.25),
+          height: width * 0.5 * 0.13,
           child: Stack(
             fit: StackFit.expand,
             children: [
-              _ListViewMovieCard(width),
+              _ListViewBrandCard(width),
               _buildGradientOverlay(height),
               _forwardButton(),
-              if (_showBackwardButton) _backwardButton(),
+              if (_showBackwardButton)
+                _backwardButton(), // Show backward button conditionally
             ],
           ),
         ),
@@ -138,26 +110,18 @@ class _ListMovieCardState extends State<ListMovieCard> {
     );
   }
 
-  Widget _ListViewMovieCard(double width) {
+  Widget _ListViewBrandCard(double width) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       controller: _scrollController,
       itemCount: widget.datas.length,
       itemBuilder: (context, index) {
         final movie = widget.datas[index];
+
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
-          width: width * 0.2,
-          child: MovieCard(
-              movieTitle: movie['name'] as String,
-              rating: 4,
-              type: widget.genre,
-              onPressed: () =>
-                  _onCardTapped(index, width * 0.2), // Xử lý khi card được chọn
-              poster: (widget.genre == "New release"
-                  ? movie['poster_url']
-                  : "https://phimimg.com/${movie['poster_url']}") as String,
-              isActive: _selectedIndex == index),
+          width: width * 0.13,
+          child: BrandBlock(assetsLink: "assets/images/netflix.svg"),
         );
       },
     );
@@ -185,10 +149,5 @@ class _ListMovieCardState extends State<ListMovieCard> {
         onPressed: () => _handlingBackwardButtonClick(),
       ),
     );
-  }
-
-  TextStyle GenreTextStyle() {
-    return TextStyle(
-        fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
   }
 }

@@ -1,7 +1,10 @@
 import 'package:cross_platform_flms_application/widgets/AppBar/app_bar.dart';
 import 'package:cross_platform_flms_application/widgets/HeroSection/hero_section.dart';
 import 'package:cross_platform_flms_application/widgets/list_movie_card.dart';
+import 'package:cross_platform_flms_application/widgets/recommend_section.dart';
 import 'package:flutter/material.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -442,16 +445,16 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   static final List<Map<String, Object>> newReleases = [
     {
-      "modified": {"time": "2024-08-30T12:32:20.000Z"},
-      "_id": "64e6098144c759b0eaba7129a71067e9",
-      "name": "Tam Quốc",
-      "slug": "tam-quoc",
-      "origin_name": "Three Kingdoms",
+      "modified": {"time": "2024-08-31T14:51:02.000Z"},
+      "_id": "c8b5850476913c169ecbb4d02bbe32a5",
+      "name": "Tình Yêu Và Những Vì Sao Của Tôi",
+      "slug": "tinh-yeu-va-nhung-vi-sao-cua-toi",
+      "origin_name": "My Love And Stars",
       "poster_url":
-          "https://phimimg.com/upload/vod/20240830-1/fed61e8483edccce93a0a1b9110c6c56.jpg",
+          "https://phimimg.com/upload/vod/20240831-1/03fdde8381f726a6599ceb40a2a7e7f7.jpg",
       "thumb_url":
-          "https://phimimg.com/upload/vod/20240830-1/8a15cf1f042ac8a876870c7f49d0d3b4.jpg",
-      "year": 2010
+          "https://phimimg.com/upload/vod/20240831-1/f6db86d35350794d5bdb1fb7c202127b.jpg",
+      "year": 2022
     },
     {
       "modified": {"time": "2024-08-30T12:29:39.000Z"},
@@ -635,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
       "year": 1985
     },
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

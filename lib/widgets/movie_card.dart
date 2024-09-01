@@ -1,3 +1,4 @@
+import 'package:cross_platform_flms_application/config/app_colors.dart';
 import 'package:cross_platform_flms_application/config/app_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -7,15 +8,16 @@ class MovieCard extends StatelessWidget {
   final int rating;
   final String poster;
   final String type;
+  final bool? isActive;
 
-  const MovieCard({
-    super.key,
-    required this.movieTitle,
-    required this.rating,
-    required this.type,
-    required this.onPressed,
-    required this.poster,
-  });
+  const MovieCard(
+      {super.key,
+      required this.movieTitle,
+      required this.rating,
+      required this.type,
+      required this.onPressed,
+      required this.poster,
+      this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,10 @@ class MovieCard extends StatelessWidget {
         onTap: onPressed,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-          ),
+              borderRadius: BorderRadius.circular(15),
+              border: isActive == true
+                  ? Border.all(color: AppColorConfig.button, width: 2.0)
+                  : Border.all(width: 0, color: Colors.transparent)),
           child: Stack(
             fit: StackFit.expand,
             children: [
