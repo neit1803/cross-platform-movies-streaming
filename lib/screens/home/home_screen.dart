@@ -1,5 +1,6 @@
 import 'package:cross_platform_flms_application/widgets/AppBar/app_bar.dart';
 import 'package:cross_platform_flms_application/widgets/HeroSection/hero_section.dart';
+import 'package:cross_platform_flms_application/widgets/footer_bar.dart';
 import 'package:cross_platform_flms_application/widgets/list_movie_card.dart';
 import 'package:cross_platform_flms_application/widgets/recommend_section.dart';
 import 'package:flutter/material.dart';
@@ -645,18 +646,30 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: CustomAppBar(),
         extendBodyBehindAppBar: true,
-        body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Container(
-              padding: EdgeInsets.zero,
-              margin: const EdgeInsets.only(bottom: 100),
-      
-              child: Column(children: [
-                HeroSection(datas: newReleases),
-                ListMovieCard(genre: "New release", datas: newReleases),
-                ListMovieCard(genre: "Series", datas: Series)
-              ]),
-            )),
+        body: FooterView(
+          flex: 10,
+
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                padding: EdgeInsets.zero,
+                margin: const EdgeInsets.only(bottom: 100),
+                
+                child: Column(children: [
+                  HeroSection(datas: newReleases),
+                  ListMovieCard(genre: "New release", datas: newReleases),
+                  ListMovieCard(genre: "Series", datas: Series),
+                  RecommendSection(datas: newReleases)
+                ]),
+              )
+            ),
+          ],
+          footer: Footer(
+            backgroundColor: Colors.transparent,
+            child: FooterBar()
+          ),
+        ),
       ),
     );
   }
