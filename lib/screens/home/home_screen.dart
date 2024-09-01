@@ -7,6 +7,8 @@ import 'package:cross_platform_flms_application/widgets/list_brand_card.dart';
 import 'package:cross_platform_flms_application/widgets/list_movie_card.dart';
 import 'package:cross_platform_flms_application/widgets/recommend_section.dart';
 import 'package:flutter/material.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -646,21 +648,34 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: CustomAppBar(),
       extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            padding: EdgeInsets.zero,
-            margin: const EdgeInsets.only(bottom: 100),
-            child: Column(children: [
-              HeroSection(datas: newReleases),
-              ListBrandCard(datas: newReleases),
-              ListMovieCard(genre: "New release", datas: newReleases),
-              ListMovieCard(genre: "Series", datas: Series),
-              SizedBox(height: 30),
-              RecommendSection(datas: newReleases),
-              FooterBar()
-            ]),
-          )),
+      body: FooterView(
+        flex: 10,
+        children: [
+          SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                padding: EdgeInsets.zero,
+                margin: const EdgeInsets.only(bottom: 100),
+                child: Column(children: [
+                  HeroSection(datas: newReleases),
+                  ListBrandCard(datas: newReleases),
+                  ListMovieCard(genre: "New release", datas: newReleases),
+                  ListMovieCard(genre: "Series", datas: Series),
+                  SizedBox(height: 30),
+                  RecommendSection(datas: newReleases),
+                  ListMovieCard(genre: "Series", datas: Series),
+                  SizedBox(height: 30),
+                  ListMovieCard(genre: "Series", datas: Series),
+                  SizedBox(height: 30),
+                  ListMovieCard(genre: "Series", datas: Series),
+                ]),
+              )),
+        ],
+        footer: Footer(
+          child: FooterBar(),
+          backgroundColor: Colors.transparent,
+        ),
+      ),
     );
   }
 }
