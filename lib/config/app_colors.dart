@@ -7,4 +7,5 @@ class AppColorConfig {
   static const Color rating = Color(0xFFFFCD19);
   static const Color brandLabel = Color(0xFF08080A);
   static const Color directionButton = Color(0xFF28262D);
+  static const Color divider = Color(0xFF18171A);
 }

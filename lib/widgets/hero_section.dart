@@ -25,24 +25,26 @@ class _HeroSection extends State<HeroSection> {
 
     return Container(
       width: width,
-      padding: const EdgeInsets.all(10),
+      margin: EdgeInsets.only(bottom: 50),
       child: FeatureMovies(width, height, _controller),
     );
   }
 
-  Widget FeatureMovies(double width, double height, CarouselSliderController controller) {
+  Widget FeatureMovies(
+      double width, double height, CarouselSliderController controller) {
     return Stack(
       children: [
         CarouselSlider.builder(
           carouselController: controller,
           itemCount: widget.datas.length,
-          itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) => 
-            Container(
-              width: width,
-              height: height,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-              ),
+          itemBuilder:
+              (BuildContext context, int itemIndex, int pageViewIndex) =>
+                  Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
             child: Image.network(
               widget.datas[itemIndex]['thumb_url'].toString(),
               fit: BoxFit.fitWidth,
@@ -51,7 +53,7 @@ class _HeroSection extends State<HeroSection> {
           ),
           options: CarouselOptions(
             viewportFraction: 1,
-            aspectRatio: 16/9, // Set height to maintain aspect ratio
+            aspectRatio: 16 / 9, // Set height to maintain aspect ratio
             initialPage: 0,
             reverse: false,
             autoPlay: true,
@@ -78,7 +80,6 @@ class _HeroSection extends State<HeroSection> {
               ),
               onDotClicked: (index) {
                 controller.animateToPage(index);
-                
               },
             ),
           ),

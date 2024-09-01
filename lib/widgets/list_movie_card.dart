@@ -20,6 +20,7 @@ class ListMovieCard extends StatefulWidget {
 class _ListMovieCardState extends State<ListMovieCard> {
   late ScrollController _scrollController;
   bool _showBackwardButton = false;
+  int? _selectedIndex; // Lưu chỉ số của card được chọn
 
   @override
   void initState() {
@@ -52,6 +53,32 @@ class _ListMovieCardState extends State<ListMovieCard> {
       duration: Duration(seconds: 1),
       curve: Curves.easeIn,
     );
+  }
+
+  void _onCardTapped(int index, double cardWidth) {
+    setState(() {
+      if (_selectedIndex == index) {
+        _selectedIndex = null; // Bỏ chọn nếu card đang được chọn
+      } else {
+        _selectedIndex = index; // Chọn card mới
+      }
+      if (_selectedIndex != null) {
+        final selectedIndex = _selectedIndex!;
+        final itemOffset = selectedIndex * (cardWidth + 16);
+        if (_scrollController.hasClients) {
+          final itemOffset = selectedIndex * (cardWidth + 16);
+          final offset = itemOffset - _scrollController.offset;
+
+          if (offset.abs() > cardWidth) {
+            _scrollController.animateTo(
+              _scrollController.offset + offset,
+              duration: Duration(seconds: 1),
+              curve: Curves.easeIn,
+            );
+          }
+        }
+      }
+    });
   }
 
   @override
@@ -118,19 +145,19 @@ class _ListMovieCardState extends State<ListMovieCard> {
       itemCount: widget.datas.length,
       itemBuilder: (context, index) {
         final movie = widget.datas[index];
-
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
           width: width * 0.2,
           child: MovieCard(
-            movieTitle: movie['name'] as String,
-            rating: 4,
-            type: widget.genre,
-            onPressed: () => print(movie['name']),
-            poster: (widget.genre == "New release"
-                ? movie['poster_url']
-                : "https://phimimg.com/${movie['poster_url']}") as String,
-          ),
+              movieTitle: movie['name'] as String,
+              rating: 4,
+              type: widget.genre,
+              onPressed: () =>
+                  _onCardTapped(index, width * 0.2), // Xử lý khi card được chọn
+              poster: (widget.genre == "New release"
+                  ? movie['poster_url']
+                  : "https://phimimg.com/${movie['poster_url']}") as String,
+              isActive: _selectedIndex == index),
         );
       },
     );
