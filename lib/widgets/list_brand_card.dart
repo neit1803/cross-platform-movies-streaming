@@ -1,5 +1,6 @@
 import 'package:cross_platform_flms_application/config/app_colors.dart';
 import 'package:cross_platform_flms_application/config/app_icons.dart';
+import 'package:cross_platform_flms_application/config/dimesion.dart';
 import 'package:cross_platform_flms_application/widgets/brand_block.dart';
 import 'package:cross_platform_flms_application/widgets/direction_button.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class _ListBrandCardState extends State<ListBrandCard> {
 
     return Container(
       width: width,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(Dimensions.padding(context, 30)),
       child: _ColumBrandCard(width, height),
     );
   }

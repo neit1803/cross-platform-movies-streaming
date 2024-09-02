@@ -1,3 +1,4 @@
+import 'package:cross_platform_flms_application/config/dimesion.dart';
 import 'package:flutter/material.dart';
 
 class HeroImage extends StatefulWidget {
@@ -13,11 +14,13 @@ class _HeroImage extends State<HeroImage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Image.network(
-      widget.imgUrl,
-      fit: BoxFit.cover,
-      width: width,
-      height: height,
+    return Container(
+      child: Image.network(
+        widget.imgUrl,
+        fit: BoxFit.cover,
+        width: width,
+        height:height
+      ),
     );
   }
 }

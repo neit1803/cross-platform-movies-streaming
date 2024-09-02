@@ -1,6 +1,7 @@
 import 'package:cross_platform_flms_application/config/app_colors.dart';
 import 'package:cross_platform_flms_application/config/app_icons.dart';
 import 'package:cross_platform_flms_application/config/app_text.dart';
+import 'package:cross_platform_flms_application/config/dimesion.dart';
 import 'package:cross_platform_flms_application/screens/home/home_screen.dart';
 import 'package:cross_platform_flms_application/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -10,23 +11,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor = AppColorConfig.background;
   final double appBarHeight = 80;
 
-  const CustomAppBar({Key? key}) : super(key: key);
+  CustomAppBar({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: const EdgeInsets.only(top: 40.0),
+        margin:  EdgeInsets.only(top: Dimensions.height(context, 30)),
         child: AppBar(
           leadingWidth: 150,
           backgroundColor: Colors.transparent,
           centerTitle: true,
           leading: Container(
             width: 500,
-            padding: const EdgeInsets.only(left: 60.0),
+            padding: EdgeInsets.only(left: Dimensions.padding(context, 60)),
             child: FlutterLogo(),
           ),
-          title: Row(
+          title: Dimensions.isMobile(context)? 
+          Container(
+
+          )
+          :
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -63,6 +70,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: AppIconsConfig.searchIcon,
             ),
             const SizedBox(width: 20),
+            Dimensions.isMobile(context)?
+            Builder(builder: (context) {
+              return IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  });
+            })
+            :
             IconButton(
               padding: EdgeInsets.zero,
               onPressed: () {},
@@ -75,6 +91,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             //   padding: const EdgeInsets.only(right: 100.0),
             //   child: CustomButton(content: "Login", onPressed: () {}, isActive: true),
             // ),
+            Dimensions.isMobile(context)? 
+            Container()
+            :
             Padding(
               padding: EdgeInsets.only(right: 60),
               child: InkWell(

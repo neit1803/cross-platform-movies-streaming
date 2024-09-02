@@ -1,4 +1,5 @@
 import 'package:cross_platform_flms_application/config/app_colors.dart';
+import 'package:cross_platform_flms_application/config/dimesion.dart';
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 
@@ -11,6 +12,7 @@ class FooterBar extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
 
     return Container(
+      padding: EdgeInsets.all(Dimensions.padding(context, 30)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

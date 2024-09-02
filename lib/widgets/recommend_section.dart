@@ -1,5 +1,6 @@
 import 'package:cross_platform_flms_application/config/app_icons.dart';
 import 'package:cross_platform_flms_application/config/app_text.dart';
+import 'package:cross_platform_flms_application/config/dimesion.dart';
 import 'package:cross_platform_flms_application/widgets/custom_button.dart';
 import 'package:cross_platform_flms_application/widgets/list_movie_card.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,6 @@ class _RecommendSectionState extends State<RecommendSection> {
               width: width,
               height: height * 0.8,
               color: Colors.transparent,
-              padding: EdgeInsets.only(top: 60),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

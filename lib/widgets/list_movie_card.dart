@@ -1,4 +1,5 @@
 import 'package:cross_platform_flms_application/config/app_colors.dart';
+import 'package:cross_platform_flms_application/config/dimesion.dart';
 import 'package:flutter/material.dart';
 import 'package:cross_platform_flms_application/widgets/movie_card.dart';
 import 'package:cross_platform_flms_application/widgets/direction_button.dart';
@@ -88,7 +89,7 @@ class _ListMovieCardState extends State<ListMovieCard> {
 
     return Container(
       width: width,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(Dimensions.padding(context,30)),
       child: _ColumnMovieCard(width, height),
     );
   }
@@ -146,7 +147,7 @@ class _ListMovieCardState extends State<ListMovieCard> {
       itemBuilder: (context, index) {
         final movie = widget.datas[index];
         return Container(
-          margin: EdgeInsets.symmetric(horizontal: 8),
+          margin: EdgeInsets.only(right: 12),
           width: width * 0.2,
           child: MovieCard(
               movieTitle: movie['name'] as String,

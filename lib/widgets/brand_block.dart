@@ -17,7 +17,7 @@ class BrandBlock extends StatelessWidget {
           borderRadius: BorderRadius.circular(15)),
       child: SvgPicture.asset(
         "$assetsLink",
-        fit: BoxFit.contain,
+        fit: BoxFit.fill,
       ),
     );
   }
