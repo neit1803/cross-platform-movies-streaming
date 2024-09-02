@@ -10,34 +10,41 @@ class HeroBanner extends StatefulWidget {
   final List<Map<String, Object>> categoriesData;
   final int numberMovies;
   final ValueChanged onDotClicked;
-  HeroBanner({super.key, required this.movieData, required this.categoriesData, required this.numberMovies, required this.onDotClicked});
+  int currentIndex;
+  HeroBanner({super.key, required this.movieData, required this.categoriesData, required this.numberMovies, required this.onDotClicked, required this.currentIndex});
 
   @override
   State<HeroBanner> createState() => _HeroBanner();
 }
 
-class _HeroBanner extends State<HeroBanner>{
-  int _currentIndex = 0;
-  Timer? _timer;
-   @override
+class _HeroBanner extends State<HeroBanner> with SingleTickerProviderStateMixin{
+  late AnimationController _animationController;
+  late Animation<double> _opacityAnimation;
+
+  @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 4), (timer) async {
-      if (mounted) {
-        setState(() {
-          _currentIndex = (_currentIndex + 1) % widget.numberMovies;
-          widget.onDotClicked(_currentIndex);
-        });
-      }
-    });
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _opacityAnimation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    _startAutoUpdate();
+  }
+
+  void _startAutoUpdate() {
+    _animationController.reset();
+    _animationController.forward();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
+    // TODO: implement dispose
+    _animationController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -53,7 +60,6 @@ class _HeroBanner extends State<HeroBanner>{
     final String content = widget.movieData['content'].toString();
 
     return InkWell(
-
       child: Container(
         padding: const EdgeInsets.all(30),
         width: width,
@@ -78,29 +84,41 @@ class _HeroBanner extends State<HeroBanner>{
               ),
             ),
             SizedBox(height: 20,),
-            Container(
-              width: width * 0.4,
-              child: Text(
-                title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+            FadeTransition(
+              opacity: _opacityAnimation,
+              child: Container(
+                width: width * 0.4,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-            Text(
-              subtitle,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+            FadeTransition(
+              opacity: _opacityAnimation,
+              child: Container(
+                width: width*0.4,
+                child: Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
               ),
             ),
-            Container(
-              width: width * 0.4,
-              child: Text(
-                content,
-                style: TextStyle(color: Colors.white, fontSize: 14),
+            FadeTransition(
+              opacity: _opacityAnimation,
+              child: Container(
+                width: width * 0.4,
+                child: Text(
+                  content,
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
               ),
             ),
             Container(
@@ -122,7 +140,7 @@ class _HeroBanner extends State<HeroBanner>{
                   ),
                   Spacer(),
                   AnimatedSmoothIndicator(
-                    activeIndex: _currentIndex,
+                    activeIndex: widget.currentIndex,
                     count: widget.numberMovies,
                     effect: WormEffect(
                       dotHeight: 8.0,
@@ -132,7 +150,7 @@ class _HeroBanner extends State<HeroBanner>{
                     ),
                     onDotClicked: (index) {
                       setState(() {
-                        _currentIndex = index;
+                        widget.currentIndex = index;
                       });
                       widget.onDotClicked(index);
                     },
